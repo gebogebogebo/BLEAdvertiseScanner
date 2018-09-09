@@ -105,6 +105,28 @@ namespace BLEAdvertiseScanner
                     // サービスUUIDってなに？→http://jellyware.jp/kurage/bluejelly/uuid.html
                     Console.WriteLine($"-> Service UUID = {uuidone} -> {this.CheckServiceUUIDInfo(uuidone)}");
                 }
+                Console.WriteLine("");
+            }
+
+            {
+                var manufacturerSections = args.Advertisement.ManufacturerData;
+                Console.WriteLine($"Manufacturer Num = {manufacturerSections.Count}");
+                if (manufacturerSections.Count > 0) {
+                    foreach (var manuone in manufacturerSections) {
+                        Console.WriteLine($"<Manufacturer>");
+                        Console.WriteLine($"-> Data Length = {manuone.Data.Length}");
+                        if (manuone.Data.Length > 0) {
+                            var data = new byte[manuone.Data.Length];
+                            using (var reader = Windows.Storage.Streams.DataReader.FromBuffer(manuone.Data)) {
+                                reader.ReadBytes(data);
+
+                                var tmp = BitConverter.ToString(data);
+                                Console.WriteLine($"-> Data = {tmp}");
+                            }
+                        }
+                    }
+                }
+                Console.WriteLine("");
             }
 
 
