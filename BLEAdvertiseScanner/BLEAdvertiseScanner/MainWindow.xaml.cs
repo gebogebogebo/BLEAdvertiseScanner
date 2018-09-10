@@ -114,6 +114,7 @@ namespace BLEAdvertiseScanner
                 if (manufacturerSections.Count > 0) {
                     foreach (var manuone in manufacturerSections) {
                         Console.WriteLine($"<Manufacturer>");
+                        Console.WriteLine($"-> CompanyId = {manuone.CompanyId.ToString("X2")}");
                         Console.WriteLine($"-> Data Length = {manuone.Data.Length}");
                         if (manuone.Data.Length > 0) {
                             var data = new byte[manuone.Data.Length];
