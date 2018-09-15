@@ -13,7 +13,7 @@ A sample program for receiving an advertisement packet transmitted by a BLE (Blu
 - Ref [Qiita](https://qiita.com/gebo/items/2e51bebd3d26a3025d9f) 
 
 ## Requirement
-- BLE Device Health Thermometer 体温計
+- BLE Device 
 
 ## Licence
 MIT Licence
