@@ -26,6 +26,14 @@ namespace BLEAdvertiseScanner
             // rssi >= -60のときスキャンする
             //this.advWatcher.SignalStrengthFilter.InRangeThresholdInDBm = -60;
 
+            // パッシブスキャン/アクティブスキャン
+            // スキャン応答のアドバタイズを併せて受信する場合＝BluetoothLEScanningMode.Active
+            // ActiveにするとBluetoothLEAdvertisementType.ScanResponseが取れるようになる。（スキャンレスポンスとは追加情報のこと）
+            // ※電力消費量が大きくなり、またバックグラウンド モードでは使用できなくなるらしい
+            // https://docs.microsoft.com/ja-jp/windows/uwp/devices-sensors/ble-beacon
+            this.advWatcher.ScanningMode = BluetoothLEScanningMode.Active;
+            //this.advWatcher.ScanningMode = BluetoothLEScanningMode.Passive;
+
             this.advWatcher.Received += this.Watcher_Received;
 
             // スキャン開始
@@ -73,7 +81,7 @@ namespace BLEAdvertiseScanner
                     Console.WriteLine($"-> ADV_DIRECT_IND:コネクション可能、スキャン×");
                     break;
                 case BluetoothLEAdvertisementType.ScannableUndirected:
-                    Console.WriteLine($"-> ADV_SCAN_IND:コネクション×、スキャン〇");
+                    Console.WriteLine($"-> ADV_SCAN_IND:コネクション×、スキャン可能");
                     break;
                 case BluetoothLEAdvertisementType.NonConnectableUndirected:
                     Console.WriteLine($"-> ADV_NONCONN_IND:コネクション×、スキャン×");
